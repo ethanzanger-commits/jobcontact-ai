@@ -1,0 +1,4 @@
+{"manifest_version":3,"name":"JobContact AI","version":"0.1.0","description":"Don't just apply. Find your way in. Find people to contact at the company behind a job posting.",
+"action":{"default_popup":"popup.html","default_title":"JobContact AI","default_icon":{"16":"icon16.png","48":"icon48.png","128":"icon128.png"}},
+"icons":{"16":"icon16.png","48":"icon48.png","128":"icon128.png"},
+"permissions":["activeTab","scripting","storage"]}

@@ -1,0 +1,15 @@
+import assert from 'node:assert';
+import { parseJob, suggest, toCSV, companyFromUrl, detectDept } from './src/core';
+assert.equal(companyFromUrl('https://boards.greenhouse.io/wix/jobs/1'), 'Wix');
+assert.equal(companyFromUrl('https://jobs.lever.co/monday/abc'), 'Monday');
+assert.equal(companyFromUrl('https://www.comeet.com/jobs/riskified/12.345/pm'), 'Riskified');
+assert.equal(companyFromUrl('https://acme.wd5.myworkdayjobs.com/en/x'), 'Acme');
+assert.equal(companyFromUrl('https://careers.wix.co.il/x'), 'Wix');
+const j = parseJob('Paid Media Manager at Wix\nLocation: Tel Aviv\nBlah');
+assert.equal(j.company, 'Wix'); assert.equal(j.title, 'Paid Media Manager'); assert.equal(j.location, 'Tel Aviv');
+assert.equal(detectDept(j.title), 'Performance Marketing');
+const s = suggest(j);
+assert.equal(s.length, 5);
+assert.ok(decodeURIComponent(s[0].search).includes('"Wix" "Head of Performance Marketing"'));
+assert.ok(!toCSV([{ id: '1', name: '=cmd', title: '', company: '', email: '', linkedin: '', source: '', notes: 'a"b', confidence: 'Guess', createdAt: 0 }]).includes('"=cmd'));
+console.log('shared tests passed');
